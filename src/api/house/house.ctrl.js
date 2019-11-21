@@ -1,8 +1,19 @@
 const models = require('../../models');
 
 exports.register = async (req, res) => {
-  const { name, address, genderLimit, ageLimit, contractperiod,information, maxDeposit, maxMonthly, imageData } = req.body;
+  const { name, address, genderLimit, ageLimit, contractperiod, information, maxDeposit, maxMonthly } = req.body;
+  const { userData } = req.decoded;
 
+  if(userData.auth !== 0) {
+    const result = {
+      status: 403,
+      message: "손님은 작성 권한 없어요!",
+    }
+    res.status(403).json(result);
+
+    return;
+  }
+ 
   if(!address){
     const result = {
         status: 400,
@@ -74,6 +85,44 @@ exports.getHouseData = async (req, res) =>{
   } catch(error) {
     console.log(error);
 
+    const result = {
+      status: 500,
+      message: "서버 에러!",
+    }
+
+    res.status(500).json(result);
+  }
+}
+
+exports.getUserHouse = async (req, res) => {
+  const { userData } = req.decoded;
+  // console.log(userData);
+
+  if(userData.auth === 1) {
+    const result = {
+      status: 403,
+      message: "손님은 하우스 불러오기 권한 없어요!",
+    }
+    res.status(403).json(result);
+
+    return;
+  }
+  
+  try {
+    const house_data = await models.House.getUserHouse(userData.id);
+
+    const result = {
+      status: 200,
+      message: "내가 작성한 하우스 불러오기 성공!",
+      data: {
+        house_data
+      }
+    }
+
+    res.status(200).json(result);
+  } catch(error) {
+    console.log(error);
+    
     const result = {
       status: 500,
       message: "서버 에러!",

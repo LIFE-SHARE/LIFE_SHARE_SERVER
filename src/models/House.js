@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       contractperiod: {
         field: 'contractperiod',
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       information: {
@@ -78,6 +78,12 @@ module.exports = (sequelize, DataTypes) => {
       House.getHouse = (houseId) => House.findOne({
         where: {
           id: houseId,
+        }
+      });
+
+      House.getUserHouse = (userId) => House.findAll({
+        where: {
+          userId: userId,
         }
       });
   
