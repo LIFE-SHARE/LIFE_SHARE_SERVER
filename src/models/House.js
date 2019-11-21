@@ -40,16 +40,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(1000),
         allowNull: false,
       },
-      maxDeposit: {
-        field: 'maxDeposit',
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      maxMonthly: {
-        field: 'maxMonthly',
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       imageData: {
         field: 'imageData',
         type: DataTypes.STRING(100),

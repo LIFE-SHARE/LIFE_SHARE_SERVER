@@ -1,8 +1,10 @@
 const models = require('../../models');
 
 exports.register = async (req, res) => {
-  const { name, address, genderLimit, ageLimit, contractperiod, information, maxDeposit, maxMonthly } = req.body;
+  const { name, address, genderLimit, ageLimit, contractperiod, information } = req.body;
+  const image = req.files[0].filename;
   const { userData } = req.decoded;
+  console.log(userData)
 
   if(userData.auth !== 0) {
     const result = {
@@ -35,7 +37,7 @@ exports.register = async (req, res) => {
   }
 
   try{
-    models.House.create({name: name, address: address, genderLimit: genderLimit, ageLimit: ageLimit, contractperiod: contractperiod, information: information, imageData: image})
+    models.House.create({name: name, userId:userData.id, address: address, genderLimit: genderLimit, ageLimit: ageLimit, contractperiod: contractperiod, information: information, imageData: image})
     .then(data=>{
         const result = {
             status: 200,
