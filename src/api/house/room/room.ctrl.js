@@ -1,12 +1,12 @@
 const models = require('../../../models');
 
 exports.enrollmentRoom = async (req, res) => {
-  const { information, deposit, monthly, people_count, houseId } = req.body;
+  const {  deposit, monthly, people_count, houseId } = req.body;
 
   try {
     const image = req.files[0].filename;
 
-    await models.Room.createRoom(information, deposit, monthly, people_count, image, houseId);
+    await models.Room.createRoom( deposit, monthly, people_count, image, houseId);
 
     const result = {
       status: 200,
