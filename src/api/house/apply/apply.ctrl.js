@@ -1,16 +1,17 @@
-const models = require('../../models');
+const models = require('../../../models');
 
 exports.postApply = async (req, res) =>{
-    const { user_name, user_age, gender } = req.body;
+    const { userData } = req.decoded;
+    console.log(userData);
 
     try{
-        models.Apply.created({user_name: user_name,  user_age:  user_age, gender})
+        models.Apply.create({userName: userData.name,  userAge:  userData.age, gender: userData.gender})
         .then(data=>{
             const result = {
                 status: 200,
                 message: "등록 성공",
               }
-            console.log(data)
+              res.status(200).json(result);
         })
         
       }catch(error) {
@@ -37,7 +38,7 @@ exports.deleteApply = async (req, res) => {
                 status: 200,
                 message: "삭제 성공",
               }
-            console.log(data)
+              res.status(200).json(result);
         })
         
     }catch(error) {
@@ -50,4 +51,8 @@ exports.deleteApply = async (req, res) => {
 
         res.status(500).json(result);
     }
+}
+
+exports.getApply = async (req, res) =>{
+    
 }

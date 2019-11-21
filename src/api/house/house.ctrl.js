@@ -96,7 +96,6 @@ exports.getHouseData = async (req, res) =>{
     res.status(500).json(result);
   }
 }
-
 exports.getUserHouse = async (req, res) => {
   const { userData } = req.decoded;
   // console.log(userData);
