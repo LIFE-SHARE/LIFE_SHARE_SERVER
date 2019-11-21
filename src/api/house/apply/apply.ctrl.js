@@ -1,11 +1,12 @@
 const models = require('../../../models');
 
-exports.postApply = async (req, res) =>{
+exports.postApply = async (req, res) => {
+    const { houseId } = req.body;
     const { userData } = req.decoded;
-    console.log(userData);
+    console.log(houseId);
 
     try{
-        models.Apply.create({userName: userData.name,  userAge:  userData.age, gender: userData.gender})
+        models.Apply.create({userName: userData.name, houseId: houseId, userAge: userData.age, gender: userData.gender})
         .then(data=>{
             const result = {
                 status: 200,
@@ -54,5 +55,5 @@ exports.deleteApply = async (req, res) => {
 }
 
 exports.getApply = async (req, res) =>{
-    
+    const { houseId} = req.body
 }

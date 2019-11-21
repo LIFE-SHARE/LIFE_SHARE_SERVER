@@ -5,6 +5,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(100),
       allowNull: false
     },
+    houseId: {
+      field: 'houseId',
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     userAge: {
       field: 'user_age',
       type: DataTypes.STRING(100),
