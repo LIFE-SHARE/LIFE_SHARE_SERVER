@@ -1,7 +1,7 @@
 const account = require('../../config/google.account.json');
+const nodeMailer = require('nodemailer');
 
 exports.sendEmail = async (email ,houseName) => {
-  
   var transporter = await nodeMailer.createTransport({
     service:'gmail',
     port: 587,

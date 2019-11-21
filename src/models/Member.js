@@ -63,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Member.findMemberForLogin = (id, pw) => Member.findOne({
-      attributes: ['id', 'name', 'phone_number', 'gender', 'age', 'auth', 'join_date'],
+      attributes: ['id', 'name', 'phone_number', 'gender', 'age', 'auth', 'join_date', 'email'],
 
       where: {
         id: id,
