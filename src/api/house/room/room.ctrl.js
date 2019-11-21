@@ -1,9 +1,23 @@
 const models = require('../../../models');
 
 exports.enrollmentRoom = async (req, res) => {
-  const {  deposit, monthly, people_count, houseId } = req.body;
+  const { deposit, monthly, people_count, houseId } = req.body;
+  const { userData } = req.decoded;
+
+
+
 
   try {
+    const house_data = await models.House.getHouse(houseId);
+    if(house_data.dataValues.userId !== userData.id) {
+      const result = {
+        status: 403,
+        message: '작성 권한 없음!'
+      }
+  
+      res.status(403).json(result);
+    }
+
     const image = req.files[0].filename;
 
     await models.Room.createRoom( deposit, monthly, people_count, image, houseId);
