@@ -48,5 +48,35 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     });
 
+
+    Member.findMemberId = (id) => Member.findOne({
+      where: {
+        id: id,
+      },
+
+      raw: true,
+    });
+
+    Member.findMemberForLogin = (id, pw) => Member.findOne({
+      attributes: ['id', 'name', 'phone_number', 'gender', 'age', 'auth', 'join_date'],
+
+      where: {
+        id: id,
+        pw: pw,
+      },
+
+      raw: true,
+    });
+
+    Member.registerAccount = (id, pw, name, phone_number, auth, age, gender) => Member.create({
+      id: id,
+      pw: pw,
+      name: name,
+      phone_number: phone_number,
+      auth: auth,
+      gender: gender,
+      age: age,
+    });
+
     return Member;
 }
