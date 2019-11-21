@@ -4,7 +4,11 @@ module.exports = (sequelize, DataTypes) => {
         field: 'id',
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+      },
+      name: {
+        field: 'name',
+        type: DataTypes.STRING(100)
       },
       address: {
         field: 'address',
@@ -51,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         allowNull: false,
       }}, {
-        tablename: 'member',
+        tablename: 'house',
         timestamps: false,
       });
   

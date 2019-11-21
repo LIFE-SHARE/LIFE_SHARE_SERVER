@@ -1,2 +1,10 @@
 const models = require('../../models');
-const tokenLib = require('../../lib/token');
+
+exports.register = async (req, res) => {
+  const { name, address, genderLimit, ageLimit, contractperiod, rule, information, maxDeposit, maxMonthly, imageData } = req.body;
+
+  if(!address){
+
+  }
+  
+}
