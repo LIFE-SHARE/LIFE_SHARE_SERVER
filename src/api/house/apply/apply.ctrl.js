@@ -24,15 +24,13 @@ exports.postApply = async (req, res) => {
     
             res.status(500).json(result);
         }
-
-    
 }
 
 exports.deleteApply = async (req, res) => {
-    const { id } = req.query;
+    const { applyId } = req.query;
 
     try{
-        models.Apply.destroy({where: {id: id}})
+        models.Apply.destroy({where: {id: applyId}})
         .then(data=>{
             const result = {
                 status: 200,
@@ -54,16 +52,29 @@ exports.deleteApply = async (req, res) => {
 }
 
 exports.getApply = async (req, res) =>{
-    const { houseId } = req.body;
+    const { houseId } = req.query;
+    const { userData } = req.decoded;
 
     try {
+
+      const house_data = await models.House.getHouse(houseId);
+
+      if(userData.id !== house_data.dataValues.userId) {
+        const result = {
+          status: 403,
+          message: "조회 권한 없음!",
+        }
+  
+        res.status(403).json(result);
+      }
+
       const applyList = await models.Apply.getApplyList(houseId);
 
       const result = {
         status: 200,
         message: "신청 리스트 조회 성공!",
         data: {
-          applyList
+         applyList 
         }
       }
 
@@ -79,3 +90,28 @@ exports.getApply = async (req, res) =>{
       res.status(500).json(result);
     }
 }
+
+exports.acceptApplication = async (req, res) => {
+  const { userData } = req.decoded;
+  const { applyId } = req.query;
+
+  try {
+
+    const apply_data = await models.Apply.getApply(applyId);
+
+    console.log(apply_data);
+    
+
+  } catch(error) {
+    console.log(error);
+
+    const result = {
+      status: 500,
+      message: "서버 에러!",
+      }
+
+    res.status(500).json(result);
+  }
+}
+
+

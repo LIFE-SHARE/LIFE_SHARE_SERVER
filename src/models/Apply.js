@@ -10,6 +10,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    email: {
+      field: 'email',
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    userId: {
+      field: 'userId',
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
     message: {
       field: 'message',
       type: DataTypes.STRING(100),
@@ -40,6 +50,12 @@ module.exports = (sequelize, DataTypes) => {
   Apply.getApplyList = (houseId) => Apply.findAll({
     where: {
       houseId: houseId,
+    }
+  });
+
+  Apply.getApply = (applyId) => Apply.findOne({
+    where: {
+      id: applyId,
     }
   });
 

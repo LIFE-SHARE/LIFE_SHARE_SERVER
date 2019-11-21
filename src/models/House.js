@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       userId: {
         field: 'userId',
         type: DataTypes.STRING(100),
+        allowNull: false,
       },
       name: {
         field: 'name',
@@ -75,6 +76,8 @@ module.exports = (sequelize, DataTypes) => {
           id: houseId,
         }
       });
+
+      // House.getHouseData = ()
 
       House.getUserHouse = (userId) => House.findAll({
         where: {
