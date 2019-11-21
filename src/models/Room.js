@@ -11,28 +11,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      address: {
-        field: 'address',
-        type: DataTypes.STRING(100),
-        allowNull: false,
-      },
-      rule: {
-        field: 'rule',
-        type: DataTypes.STRING(1000),
-        allowNull: false,
-      },
       information: {
         field: 'information',
         type: DataTypes.STRING(1000),
         allowNull: false,
       },
-      maxDeposit: {
-        field: 'maxDeposit',
+      Deposit: {
+        field: 'Deposit',
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      maxMonthly: {
-        field: 'maxMonthly',
+      Monthly: {
+        field: 'Monthly',
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -44,6 +34,6 @@ module.exports = (sequelize, DataTypes) => {
         tablename: 'room',
         timestamps: false,
       });
-  
+      
       return Room;
   }

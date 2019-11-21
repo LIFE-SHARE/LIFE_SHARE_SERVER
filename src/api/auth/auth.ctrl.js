@@ -26,7 +26,6 @@ exports.login = async (req, res) => {
     return;
   }
 
-
   try {
     const member = await models.Member.findMemberForLogin(id, pw);
 

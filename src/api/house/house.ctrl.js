@@ -45,5 +45,6 @@ exports.register = async (req, res) => {
     }
 }
 exports.loading = async (req, res) =>{
-    
+    member = await models.House.findAll({});
+    console.log(member)
 }
