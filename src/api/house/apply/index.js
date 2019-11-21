@@ -1,10 +1,11 @@
 const apply = require('express').Router();
 const applyCtrl = require('./apply.ctrl');
 
-const middleWare = require('../../middleWare/auth')
+const middleWare = require('../../../middleWare/auth')
 
-apply.post('/postApply', middleWare, applyCtrl.postApply);
+apply.post('/', middleWare, applyCtrl.postApply);
+apply.post('/delete', middleWare, applyCtrl.deleteApply);
 
 
-module.exports = house;
+module.exports = apply;
 

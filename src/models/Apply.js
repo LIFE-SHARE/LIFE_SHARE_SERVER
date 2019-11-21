@@ -1,12 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const Apply = sequelize.define('Apply', {
-    id: {
-      field: 'id',
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      unipue: true,
-      primaryKey: true,
-    },
     userName: {
       field: 'user_name',
       type: DataTypes.STRING(100),
