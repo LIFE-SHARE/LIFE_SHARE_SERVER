@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER(10),
       allowNull: false
     },
+    join_date: {
+      field: 'join_date',
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    }, 
   }, {
       tablename: 'apply',
       timestamps: false,

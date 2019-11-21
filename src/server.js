@@ -16,7 +16,7 @@ app.use(express());
 app.use(cors());
 
 app.use(api);
-
+app.use('/', express.static('public'));
 
 server.listen(port, () => {
   console.log(`LIFE-SHARE-SERVER listening to port = ${port}`);
