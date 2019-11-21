@@ -50,11 +50,15 @@ module.exports = (sequelize, DataTypes) => {
         field: 'imageData',
         type: DataTypes.STRING(100),
         allowNull: false,
+      },
+      roomData: {
+        field: 'roomData',
+        type: DataTypes.INTEGER,
+        allowNull: false,
       }}, {
         tablename: 'house',
         timestamps: false,
       });
-
 
       House.findHouseAddress = (keyword) => sequelize.query(
         `SELECT * FROM houses

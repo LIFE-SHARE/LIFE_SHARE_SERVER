@@ -44,3 +44,6 @@ exports.register = async (req, res) => {
         res.status(500).json(result);
     }
 }
+exports.loading = async (req, res) =>{
+    
+}
