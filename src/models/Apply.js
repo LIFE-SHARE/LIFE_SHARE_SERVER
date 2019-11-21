@@ -10,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    message: {
+      field: 'message',
+      type: DataTypes.STRING(100),
+      allowNull: true,
+    },
     userAge: {
       field: 'user_age',
       type: DataTypes.STRING(100),
@@ -29,6 +34,13 @@ module.exports = (sequelize, DataTypes) => {
   }, {
       tablename: 'apply',
       timestamps: false,
+  });
+
+
+  Apply.getApplyList = (houseId) => Apply.findAll({
+    where: {
+      houseId: houseId,
+    }
   });
 
 
