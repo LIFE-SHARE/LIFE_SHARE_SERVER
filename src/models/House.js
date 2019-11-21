@@ -59,7 +59,13 @@ module.exports = (sequelize, DataTypes) => {
         field: 'roomData',
         type: DataTypes.INTEGER,
         allowNull: false,
-      }}, {
+      },
+      join_date: {
+        field: 'join_date',
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      }, }, {
         tablename: 'house',
         timestamps: false,
       });
