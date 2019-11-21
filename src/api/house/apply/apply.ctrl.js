@@ -1,4 +1,5 @@
 const models = require('../../../models');
+const emailLib = require('../../../lib/email');
 
 exports.postApply = async (req, res) => {
     const { houseId, message } = req.body;
@@ -60,7 +61,8 @@ exports.getApply = async (req, res) =>{
     try {
 
       const house_data = await models.House.getHouse(houseId);
-
+      console.log(house_data.dataValues.userId);
+      
       if(userData.id !== house_data.dataValues.userId) {
         const result = {
           status: 403,
@@ -94,16 +96,24 @@ exports.getApply = async (req, res) =>{
 }
 
 exports.acceptApplication = async (req, res) => {
-  const { userData } = req.decoded;
+  // const { userData } = req.decoded;
   const { applyId } = req.query;
 
   try {
 
     const apply_data = await models.Apply.getApply(applyId);
-
-    console.log(apply_data);
+    const house_data = await models.House.getHouse(apply_data.dataValues.houseId);
+    console.log(house_data.dataValues.name);
     
 
+    await emailLib.sendEmail(apply_data.dataValues.email, house_data.dataValues.name);
+
+    const result = {
+      status: 200,
+      message: "수락 성공!",
+    }
+
+    res.status(200).json(result);
   } catch(error) {
     console.log(error);
 

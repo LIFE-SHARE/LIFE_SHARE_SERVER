@@ -1,14 +1,7 @@
 const account = require('../../config/google.account.json');
-const log = require('../lib/log');
+const nodeMailer = require('nodemailer');
 
-exports.createEmailCode = async () => {
-  min = Math.ceil(12340);
-  max = Math.floor(99999);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
-exports.sendEmailCode = async (email ,code) => {
-  
+exports.sendEmail = async (email ,houseName) => {
   var transporter = await nodeMailer.createTransport({
     service:'gmail',
     port: 587,
@@ -36,9 +29,9 @@ exports.sendEmailCode = async (email ,code) => {
   };
 
   transporter.sendMail(mailOption, function(err, info) {
-    if ( err ) { log.error(err); throw err;} 
+    if ( err ) { console.log(err); throw err;} 
     else {
-        log.info('Message sent : ', info);
+        console.log('Message sent : ', info);
     }
   });
 }
