@@ -1,7 +1,9 @@
 const models = require('../../models');
 
 exports.register = async (req, res) => {
-  const { name, address, genderLimit, ageLimit, contractperiod,information, maxDeposit, maxMonthly, imageData } = req.body;
+  const { name, address, genderLimit, ageLimit, contractperiod, information} = req.body;
+  const image = req.files[0].filename;
+  const userData = req.decode;
 
   if(!address){
     const result = {
@@ -24,12 +26,13 @@ exports.register = async (req, res) => {
   }
 
   try{
-    models.House.created({name: name, address: address, genderLimit: genderLimit, ageLimit: ageLimit, contractperiod: contractperiod, information: information, maxDeposit: maxDeposit, maxMonthly: maxMonthly, imageData: imageData})
+    models.House.create({name: name, address: address, genderLimit: genderLimit, ageLimit: ageLimit, contractperiod: contractperiod, information: information, imageData: image})
     .then(data=>{
         const result = {
             status: 200,
             message: "등록 성공",
           }
+          res.status(200).json(result);
         console.log(data)
     })
     
@@ -44,7 +47,53 @@ exports.register = async (req, res) => {
         res.status(500).json(result);
     }
 }
-exports.loading = async (req, res) =>{
-    member = await models.House.findAll({});
-    console.log(member)
+exports.getHouseData = async (req, res) =>{
+  const { houseId } = req.query;
+  let house_data;
+  let room_data;
+
+  try {
+    if(houseId) {
+      house_data = await models.House.getHouse(houseId);
+      room_data = await models.Room.getRoomList(houseId);
+      console.log(house_data);
+    }
+    else {
+      house_data = await models.House.getHouseAll();
+    }
+    // console.log(house_data[0].dataValues);
+    
+    
+    const result = {
+      status: 200,
+      message: "하우스 데이터 불러오기 성공!",
+      data: {
+        house_data,
+        room_data
+      }
+    }
+
+    res.status(200).json(result);
+  } catch(error) {
+    console.log(error);
+
+    const result = {
+      status: 500,
+      message: "서버 에러!",
+    }
+
+    res.status(500).json(result);
+  }
+}
+exports.getAllHouse = async (req, res) =>{
+
+    house = await models.House.findAll();
+    const result = {
+        status: 200,
+        message: "로딩 성공",
+        data: {
+          house: house
+        }
+      }
+      console.log(house);
 }

@@ -1,11 +1,12 @@
 const house = require('express').Router();
 const houseCtrl = require('./house.ctrl');
 const room = require('./room');
+const uplode = require('../../lib/upload')
 
 const middleWare = require('../../middleWare/auth')
 
-house.post('/register', middleWare, houseCtrl.register);
-//house.post('/loading', houseCtrl.loading);
+house.get('/', houseCtrl.getHouseData);
+house.post('/register', uplode.array('image'), houseCtrl.register);
 
 house.use('/room', room);
 
