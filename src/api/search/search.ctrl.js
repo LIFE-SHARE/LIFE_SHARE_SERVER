@@ -5,7 +5,7 @@ exports.search = async (req, res) => {
 
   try {
     const house = await models.House.findHouseAddress(keyword);
-
+    const house_data = house[0];
     if(deposit && !monthly && !gender_limit) {
 
     }
