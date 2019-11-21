@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: {
         field: 'userId',
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(100),
       },
       name: {
         field: 'name',
@@ -55,11 +55,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         allowNull: false,
       },
-      roomData: {
-        field: 'roomData',
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       join_date: {
         field: 'join_date',
         type: DataTypes.DATE,
@@ -75,6 +70,16 @@ module.exports = (sequelize, DataTypes) => {
         `SELECT * FROM houses
         WHERE address LIKE '%${keyword}%';`
       );
+
+      House.getHouseAll = () => House.findAll({
+        // attributes: ['id', 'name', 'userId', 'address', 'age', 'auth', 'join_date'],
+      });
+
+      House.getHouse = (houseId) => House.findOne({
+        where: {
+          id: houseId,
+        }
+      });
   
       return House;
   }

@@ -5,7 +5,7 @@ const room = require('./room');
 const middleWare = require('../../middleWare/auth')
 
 house.post('/register', middleWare, houseCtrl.register);
-//house.post('/loading', houseCtrl.loading);
+house.get('/', houseCtrl.getHouseData);
 
 house.use('/room', room);
 

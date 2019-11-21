@@ -16,11 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      information: {
-        field: 'information',
-        type: DataTypes.STRING(1000),
-        allowNull: false,
-      },
       deposit: {
         field: 'Deposit',
         type: DataTypes.INTEGER,
@@ -40,8 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false,
       });
 
-      Room.createRoom = (information, deposit, monthly, people_count, imageData, houseId ) => Room.create({
-        information: information,
+      Room.createRoom = ( deposit, monthly, people_count, imageData, houseId ) => Room.create({
         deposit: deposit,
         monthly: monthly,
         peopleCnt: people_count,
@@ -51,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Room.getRoomList = (houseId) => Room.findAll({
         where: {
-          houseId: houseId,
+          house_id: houseId,
         }
       });
       
