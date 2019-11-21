@@ -5,5 +5,4 @@ const house = require('./house');
 api.use('/auth', auth);
 api.use('/house', house)
 
-
 module.exports = api;

@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: {
         field: 'name',
-        type: DataTypes.STRING(100)
+        type: DataTypes.STRING(100),
+        allowNull: false,
       },
       address: {
         field: 'address',
@@ -28,11 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       contractperiod: {
         field: 'contractperiod',
         type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      rule: {
-        field: 'rule',
-        type: DataTypes.STRING(1000),
         allowNull: false,
       },
       information: {
