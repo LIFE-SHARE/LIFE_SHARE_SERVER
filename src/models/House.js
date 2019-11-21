@@ -30,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      maxMember: {
+        field: 'maxMember',
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       contractperiod: {
         field: 'contractperiod',
         type: DataTypes.STRING(100),
