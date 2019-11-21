@@ -54,6 +54,12 @@ module.exports = (sequelize, DataTypes) => {
         tablename: 'house',
         timestamps: false,
       });
+
+
+      House.findHouseAddress = (keyword) => sequelize.query(
+        `SELECT * FROM houses
+        WHERE address LIKE '%${keyword}%';`
+      );
   
       return House;
   }

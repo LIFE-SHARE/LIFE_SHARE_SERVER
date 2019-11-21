@@ -16,5 +16,5 @@ module.exports = (sequelize, DataTypes) => {
         tablename: 'image',
         timestamps: false,
       });
-      return Image;
+    return Image;
   }
