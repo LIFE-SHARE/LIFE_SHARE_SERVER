@@ -5,7 +5,7 @@ const uplode = require('../../lib/upload')
 const room = require('./room');
 
 house.get('/', houseCtrl.getHouseData);
-house.get('/', middleWareAuth, houseCtrl.getUserHouse);
+house.get('/my', middleWareAuth, houseCtrl.getUserHouse);
 house.post('/',middleWareAuth, uplode.array('image'), houseCtrl.register);
 
 house.use('/room',middleWareAuth, room);
