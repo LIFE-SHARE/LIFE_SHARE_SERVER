@@ -59,6 +59,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
+  Apply.getWaitApplyList = (userId) => Apply.findAll({
+    where: {
+      userId: userId,
+    }
+  });
+
 
   return Apply;
 }

@@ -3,9 +3,11 @@ const models = require('../../../models');
 exports.postApply = async (req, res) => {
     const { houseId, message } = req.body;
     const { userData } = req.decoded;
+    console.log(userData);
+    
 
     try{
-        models.Apply.create({userName: userData.name, houseId: houseId, userAge: userData.age, gender: userData.gender, message: message})
+        models.Apply.create({userName: userData.name, houseId: houseId, userAge: userData.age, gender: userData.gender, message: message, email: userData.email, userId: userData.id})
         .then(data=>{
             const result = {
                 status: 200,
@@ -114,4 +116,28 @@ exports.acceptApplication = async (req, res) => {
   }
 }
 
+exports.getWaitApply =  async (req, res) =>{
+    const { userData } = req.decoded;
 
+    try {
+        const applyList = await models.Apply.getWaitApplyList(userData.id);
+        
+        const result = {
+            status: 200,
+            message: "신청 리스트 조회 성공!",
+            data: {
+              applyList
+            }
+          }
+          res.status(200).json(result);
+      } catch(error) {
+        console.log(error);
+  
+        const result = {
+          status: 500,
+          message: "서버 에러!",
+          }
+  
+        res.status(500).json(result);
+      }
+}
