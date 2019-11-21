@@ -3,7 +3,6 @@ const models = require('../../../models');
 exports.postApply = async (req, res) => {
     const { houseId, message } = req.body;
     const { userData } = req.decoded;
-    console.log(userData);
     
 
     try{
@@ -56,6 +55,7 @@ exports.deleteApply = async (req, res) => {
 exports.getApply = async (req, res) =>{
     const { houseId } = req.query;
     const { userData } = req.decoded;
+    console.log(houseId)
 
     try {
 
@@ -121,12 +121,24 @@ exports.getWaitApply =  async (req, res) =>{
 
     try {
         const applyList = await models.Apply.getWaitApplyList(userData.id);
-        
+        var idList = new Array();
+        var resultList = new Array();
+
+        for(var i = 0; i < applyList.length; i++){
+            const id = applyList[i].houseId;
+
+            if (!(idList.includes(id))){
+                idList.push(id)
+                var applyData = await models.House.getHouse(id);
+                resultList.push(applyData);
+            }
+        }
+
         const result = {
             status: 200,
             message: "신청 리스트 조회 성공!",
             data: {
-              applyList
+              resultList
             }
           }
           res.status(200).json(result);

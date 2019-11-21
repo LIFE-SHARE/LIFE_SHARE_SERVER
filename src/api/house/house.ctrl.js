@@ -58,6 +58,7 @@ exports.register = async (req, res) => {
         res.status(500).json(result);
     }
 }
+
 exports.getHouseData = async (req, res) =>{
   const { houseId } = req.query;
   let house_data;
@@ -96,6 +97,7 @@ exports.getHouseData = async (req, res) =>{
     res.status(500).json(result);
   }
 }
+
 exports.getUserHouse = async (req, res) => {
   const { userData } = req.decoded;
   // console.log(userData);
