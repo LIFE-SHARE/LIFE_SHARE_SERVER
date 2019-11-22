@@ -1,28 +1,25 @@
 const models = require('../../models');
 
 exports.search = async (req, res) => {
-  const { keyword, deposit, monthly, gender_limit } = req.body;
+  const { keyword } = req.body;
+  console.log(keyword);
 
   try {
     const house = await models.House.findHouseAddress(keyword);
-    const house_data = house[0];
-    if(deposit && !monthly && !gender_limit) {
+    house_data = house[0];
+    
 
-    }
-    if(!deposit && monthly && !gender_limit) {
-      
-    }
-    if(!deposit && monthly && gender_limit) {
-      
-    }
-    if(deposit && monthly && !gender_limit) {
-      
-    }
-    if(!deposit && monthly && gender_limit) {
-      
-    }
-    if(deposit && !monthly && gender_limit) {
-      
+    if(house_data === null) {
+      const result = {
+        status: 409,
+        message: '하우스 검색 실패!',
+        data: {
+          house_data,
+        }
+      }
+  
+      res.status(200).json(result);
+      return;
     }
 
     const result = {
@@ -32,7 +29,6 @@ exports.search = async (req, res) => {
         house_data,
       }
     }
-
     res.status(200).json(result);
   } catch(error) {
     console.log(error);

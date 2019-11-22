@@ -4,7 +4,8 @@ exports.register = async (req, res) => {
   const { name, address, genderLimit, ageLimit, maxMember, contractperiod, information } = req.body;
   const image = req.files[0].filename;
   const { userData } = req.decoded;
-  console.log(maxMember)
+  // console.log("test");
+  // console.log(req.body)
 
   if(userData.auth !== 0) {
     const result = {
@@ -44,7 +45,7 @@ exports.register = async (req, res) => {
             message: "등록 성공",
           }
           res.status(200).json(result);
-        console.log(data)
+        // console.log(data)
     })
     
   }catch(error) {
@@ -68,10 +69,11 @@ exports.getHouseData = async (req, res) =>{
     if(houseId) {
       house_data = await models.House.getHouse(houseId);
       room_data = await models.Room.getRoomList(houseId);
-      console.log(house_data);
+      // console.log(house_data);
     }
     else {
       house_data = await models.House.getHouseAll();
+      // console.log('data: ',house_data)
     }
     // console.log(house_data[0].dataValues);
     

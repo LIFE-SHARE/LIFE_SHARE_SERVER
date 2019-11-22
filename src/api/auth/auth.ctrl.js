@@ -3,7 +3,7 @@ const tokenLib = require('../../lib/token');
 
 exports.login = async (req, res) => {
   const { id, pw } = req.body;
-  console.log("test");
+  // console.log(id, pw);
   
   if(!id) {
     const result = {

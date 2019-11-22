@@ -6,18 +6,13 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       peopleCnt: {
-        field: 'id',
+        field: 'peopleCnt',
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      deposit: {
-        field: 'Deposit',
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      monthly: {
-        field: 'Monthly',
-        type: DataTypes.INTEGER,
+      money: {
+        field: 'money',
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       imageData: {
@@ -29,9 +24,8 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false,
       });
 
-      Room.createRoom = ( deposit, monthly, people_count, imageData, houseId ) => Room.create({
-        deposit: deposit,
-        monthly: monthly,
+      Room.createRoom = ( money, people_count, imageData, houseId ) => Room.create({
+        money: money,
         peopleCnt: people_count,
         imageData: imageData,
         house_id: houseId,
