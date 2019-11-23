@@ -108,6 +108,7 @@ exports.acceptApplication = async (req, res) => {
     
 
     await emailLib.sendEmail(apply_data.dataValues.email, house_data.dataValues.name);
+    await models.Apply.destroy({where: {id: applyId}});
 
     const result = {
       status: 200,
