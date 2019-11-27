@@ -1,9 +1,11 @@
 const models = require('../../models');
 const tokenLib = require('../../lib/token');
+const log = require('../../lib/log');
+const validate = require('../../lib/validation');
 
 exports.login = async (req, res) => {
+  log.green("CALL login API");
   const { id, pw } = req.body;
-  // console.log(id, pw);
   
   if(!id) {
     const result = {
@@ -68,6 +70,7 @@ exports.login = async (req, res) => {
 }
 
 exports.registerMember = async (req, res) => {
+  log.green("CALL registerMember API");
   const { body } = req;
 
   try {
@@ -86,7 +89,7 @@ exports.registerMember = async (req, res) => {
   }
 
   try {
-    const memberId = await models.Member.findMemberId(id);
+    const memberId = await models.Member.findMemberId(body.id);
 
     if(memberId) {
       const result = {
@@ -98,8 +101,8 @@ exports.registerMember = async (req, res) => {
 
       return;
     }
-
-    await models.Member.registerAccount(body);
+    
+    await models.Member.registerAccount(body.id, body.pw,body.name, body.phone_number, body.auth, body.age, body.gender, body.email);
 
     const result = {
       status: 200,

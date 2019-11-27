@@ -1,8 +1,9 @@
 const models = require('../../models');
+const log = require('../../lib/log');
 
 exports.search = async (req, res) => {
+  log.green("CALL SEARCH API");
   const { keyword } = req.body;
-  console.log(keyword);
 
   try {
     const house = await models.House.findHouseAddress(keyword);

@@ -1,11 +1,22 @@
 const models = require('../../models');
+const log = require('../../lib/log');
 
-exports.register = async (req, res) => {
+exports.enrollmentHouse = async (req, res) => {
+  log.green("CALL enrollmentHouse API");
   const { name, address, genderLimit, ageLimit, maxMember, contractperiod, information } = req.body;
-  const image = req.files[0].filename;
   const { userData } = req.decoded;
-  // console.log("test");
-  // console.log(req.body)
+
+  if(!req.files[0]) {
+    const result = {
+      status: 400,
+      message: "사진을 첨부해주세요!!",
+    }
+    res.status(400).json(result);
+
+    return;
+  }
+
+  const image = req.files[0].filename;
 
   if(userData.auth !== 0) {
     const result = {
@@ -19,20 +30,22 @@ exports.register = async (req, res) => {
  
   if(!address){
     const result = {
-        status: 400,
-        message: "주소를 입력해주세요!",
-      }
-      res.status(400).json(result);
+      status: 400,
+      message: "주소를 입력해주세요!",
+    }
+
+    res.status(400).json(result);
 
     return;
   }
 
   if(!name){
     const result = {
-        status: 400,
-        message: "이름을 입력해주세요!",
-      }
-      res.status(400).json(result); 
+      status: 400,
+      message: "이름을 입력해주세요!",
+    }
+
+    res.status(400).json(result); 
 
     return;
   }
@@ -40,27 +53,27 @@ exports.register = async (req, res) => {
   try{
     models.House.create({name: name, userId:userData.id, address: address, genderLimit: genderLimit, ageLimit: ageLimit, maxMember:maxMember, contractperiod: contractperiod, information: information, imageData: image})
     .then(data=>{
-        const result = {
-            status: 200,
-            message: "등록 성공",
-          }
-          res.status(200).json(result);
-        // console.log(data)
-    })
+      const result = {
+        status: 200,
+        message: "등록 성공",
+      }
+      res.status(200).json(result);
+    });
     
   }catch(error) {
-        console.log(error);
+    console.log(error);
 
-        const result = {
-        status: 500,
-        message: "서버 에러!",
-        }
-
-        res.status(500).json(result);
+    const result = {
+      status: 500,
+      message: "서버 에러!",
     }
+
+    res.status(500).json(result);
+  }
 }
 
 exports.getHouseData = async (req, res) =>{
+  log.green("CALL getHouseData API");
   const { houseId } = req.query;
   let house_data;
   let room_data;
@@ -69,15 +82,11 @@ exports.getHouseData = async (req, res) =>{
     if(houseId) {
       house_data = await models.House.getHouse(houseId);
       room_data = await models.Room.getRoomList(houseId);
-      // console.log(house_data);
     }
     else {
       house_data = await models.House.getHouseAll();
-      // console.log('data: ',house_data)
     }
-    // console.log(house_data[0].dataValues);
-    
-    
+
     const result = {
       status: 200,
       message: "하우스 데이터 불러오기 성공!",
@@ -101,14 +110,15 @@ exports.getHouseData = async (req, res) =>{
 }
 
 exports.getUserHouse = async (req, res) => {
+  log.green("CALL getUserHouse API");
   const { userData } = req.decoded;
-  // console.log(userData);
 
   if(userData.auth === 1) {
     const result = {
       status: 403,
       message: "손님은 하우스 불러오기 권한 없어요!",
     }
+
     res.status(403).json(result);
 
     return;
@@ -121,14 +131,14 @@ exports.getUserHouse = async (req, res) => {
       status: 200,
       message: "내가 작성한 하우스 불러오기 성공!",
       data: {
-        house_data
+        house_data,
       }
     }
 
     res.status(200).json(result);
   } catch(error) {
     console.log(error);
-    
+
     const result = {
       status: 500,
       message: "서버 에러!",

@@ -1,11 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     const House = sequelize.define('House', {
-      id: {
-        field: 'id',
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       userId: {
         field: 'userId',
         type: DataTypes.STRING(100),
@@ -67,17 +61,13 @@ module.exports = (sequelize, DataTypes) => {
         WHERE address LIKE '%${keyword}%';`
       );
 
-      House.getHouseAll = () => House.findAll({
-        // attributes: ['id', 'name', 'userId', 'address', 'age', 'auth', 'join_date'],
-      });
+      House.getHouseAll = () => House.findAll({});
 
       House.getHouse = (houseId) => House.findOne({
         where: {
           id: houseId,
         }
       });
-
-      // House.getHouseData = ()
 
       House.getUserHouse = (userId) => House.findAll({
         where: {

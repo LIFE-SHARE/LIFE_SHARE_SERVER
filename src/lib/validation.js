@@ -6,10 +6,11 @@ exports.validateRegisterUser = async (body) => {
     id: Joi.string().required(),
     pw: Joi.string().required(),
     name: Joi.string().required(),
-    age: Joi.string().required(),
+    age: Joi.number().required(),
     phone_number: Joi.string().required(),
-    auth: Joi.string().required(),
-    gender: Joi.string().required(),
+    auth: Joi.number().required(),
+    gender: Joi.number().required(),
+    email: Joi.string().required(),
   });
 
   try {

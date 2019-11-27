@@ -7,7 +7,7 @@ const apply = require('./apply');
 
 house.get('/', houseCtrl.getHouseData);
 house.get('/my', middleWareAuth, houseCtrl.getUserHouse);
-house.post('/',middleWareAuth, uplode.array('image'), houseCtrl.register);
+house.post('/',middleWareAuth, uplode.array('image'), houseCtrl.enrollmentHouse);
 
 house.use('/room',middleWareAuth, room);
 house.use('/apply',middleWareAuth, apply);

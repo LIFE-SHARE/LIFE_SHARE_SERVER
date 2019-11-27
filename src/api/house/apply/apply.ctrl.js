@@ -5,8 +5,6 @@ exports.postApply = async (req, res) => {
     const { houseId, message } = req.body;
     const { userData } = req.decoded;
     
-    // console.log(userData);
-    
     try{
         await models.Apply.create({userName: userData.name, houseId: houseId, userAge: userData.age, gender: userData.gender, message: message, email: userData.email, userId: userData.id})
         .then(data=>{

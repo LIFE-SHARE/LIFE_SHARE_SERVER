@@ -73,14 +73,15 @@ module.exports = (sequelize, DataTypes) => {
       raw: true,
     });
 
-    Member.registerAccount = (id, pw, name, phone_number, auth, age, gender) => Member.create({
+    Member.registerAccount = (id, pw, name, phone_number, auth, age, gender, email) => Member.create({
       id: id,
       pw: pw,
       name: name,
       phone_number: phone_number,
       auth: auth,
-      gender: gender,
       age: age,
+      gender: gender,
+      email: email,
     });
 
     return Member;
