@@ -1,3 +1,5 @@
+<img src="https://notion-emojis.s3-us-west-2.amazonaws.com/v0/svg-twitter/1f3e0.svg" width=30 heigth=30/>
+
 ## Life-share-house은 집값이 비싼 요즘 시대에 쉐어하우스를 선호하는 사람들에게 보다 쉽게 집을 알아볼 수 있도록 해주는 서비스 입니다.
 
 팀: Life-share-house(해커톤 프로젝트)
